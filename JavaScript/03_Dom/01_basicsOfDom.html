@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="heading">
+        <h1 class="head" id="hello">DOM</h1>
+        <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <input type="password">
+    </div>
+</body>
+<script>
+    console.log(window.document)
+    console.log(document.links)
+    //HTMLCollection []length: 0[[Prototype]]: HTMLCollection
+    document.getElementById("hello")
+    //<h1 class=​"head" id=​"hello">​DOM​</h1>​
+    document.getElementById("hello").innerHTML 
+    //'DOM'
+    document.getElementById("hello").innerHTML ="<h1>Hello World</h1>"
+'<h1>Hello World</h1>'
+//<h1>Hello World</h1>
+
+document.getElementById("hello").id
+//'hello'
+document.getElementById("hello").className//no class className to access
+//'head'
+
+document.getElementById("hello").getAttribute('id')
+//'hello'
+document.getElementById("hello").getAttribute('class')
+//'head'
+document.getElementById("hello").setAttribute('class','heading1')//Always Overwrite Previous so if you don't want then below
+//undefined
+document.getElementById("hello").setAttribute('class','heading1 head')
+
+const p1=document.querySelector(".para")
+//undefined//it will return you one first element if you print p1 
+
+
+const paras=document.querySelectorAll(".para")
+
+// NodeList(3) [p.para, p.para, p.para]
+// 0: p.para
+// 1: p.para
+// 2: p.para
+// length: 3
+// [[Prototype]]: NodeList
+// to iterate it you have to use forEach : ƒ forEach()
+//even if their is one element you have to use paras[0]  to access that
+
+paras.forEach((item)=>
+    console.log(item.innerHTML)
+    )
+//(3): Lorem ipsum dolor sit amet consectetur adipisicing elit.
+console.log(document.querySelector('input[type="password"]'))
+//<input type="password">
+
+
+const collect = document.getElementsByClassName('para')
+//HTMLCollection(3) [p.para, p.para, p.para]
+//convert into Array it doesn't have for Each But you can use normal for loop
+
+for (let index = 0; index < collect.length; index++) {
+      console.log(collect[index])
+}
+for (let index = 0; index < collect.length; index++) {
+      console.log(collect[index].innerHTML)
+}
+//(3):2 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+
+
+Array.from(collect)
+// (3) [p.para, p.para, p.para]
+
+const arr=Array.from(collect)
+    arr.forEach((item)=>console.log(item.innerHTML))
+//(3):1 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+</script>
+</html>

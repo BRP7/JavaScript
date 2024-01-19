@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images" style="list-style-type: none;">
+            <li><img width="200px" height="120px" id="home"  src="https://images.pexels.com/photos/731082/pexels-photo-731082.jpeg"></li>
+            <li><img width="200px" height="120px" id="stair" src="https://images.pexels.com/photos/999311/pexels-photo-999311.jpeg"></li>
+            <li><img width="200px" height="120px" id="wings" src="https://images.pexels.com/photos/1098886/pexels-photo-1098886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"></li>
+            <li><img width="200px" height="120px" id="nature" src="https://images.pexels.com/photos/369433/pexels-photo-369433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"></li>
+            <li><a href="www.google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    //  onclick="alert('Fly Without Wings!!!!')" 
+
+
+    // document.querySelector("#wings").onclick=function(){
+    //     alert("Fly Without Wings!!!!")
+    // }
+    
+
+    //attachEvent()
+    //jQuery - on
+
+    /*EVENT BUBBELING Fly Without Wings!!!!
+     wings*/
+    // document.querySelector("#images").addEventListener("click",(e)=>{
+    //     console.log(e.target.id);
+    // },false)
+
+
+    // document.querySelector("#wings").addEventListener("click",()=>{
+    //     console.log("Fly Without Wings!!!!")
+    // },false)
+    //first li click event #wings happend & then ul img event because inside wings(li)
+    //is alsi inside images(ul) THIS IS KNOWN AS EVENT BUBBLING IT IS HAPPNING BECAUSE OF 
+    //FALSE PARAMETER(BYDEFAULT)IN addEventListener to produce opposite make it TRUE
+    
+
+    /*EVENT CAPTURING  wings 
+    Fly Without Wings!!!!  */
+    document.querySelector("#images").addEventListener("click",(e)=>{
+        //console.log(e.target.id);
+    },false)
+    
+    
+    document.querySelector("#wings").addEventListener("click",()=>{
+        //console.log("Fly Without Wings!!!!")
+    },true)
+    
+    document.querySelector("#google").addEventListener("click",(e)=>{
+        e.preventDefault()
+        e.stopPropagation()//to stop bubbling or capturing
+       // console.log("google clicked")
+    },true)
+
+
+
+    document.querySelector("#images").addEventListener("click",(e)=>{
+        //console.log(e.target);//<img width="200px" height="120px" id="stair" src="https://images.pexels.com/photos/999311/pexels-photo-999311.jpeg">
+    },false)
+
+    document.querySelector("#images").addEventListener("click",(e)=>{
+        console.log(e.target.tagName)
+        if(e.target.tagName === "IMG"){
+            console.log(e.target.parentNode);//<li>…</li> if clicked outside img then it returns //<div>…</div>
+            let removeIt=e.target.parentNode
+           // removeIt.remove()
+           removeIt.parentNode.removeChild(removeIt)
+        }
+    },false)
+</script>
+</html>
